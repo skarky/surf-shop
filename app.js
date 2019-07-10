@@ -41,6 +41,9 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: true }
 }))
+
+ app.use(passport.initialize());
+  app.use(passport.session());
 //Passport starts
 // use static authenticate method of model in LocalStrategy
 passport.use(new LocalStrategy(User.authenticate()));
