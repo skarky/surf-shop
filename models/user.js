@@ -1,6 +1,6 @@
 const mongoose = require ("mongoose");
-const passportLocalMongoose("passport-local-mongoose");
-const Schema = mongose.Schema;
+const passportLocalMongoose = require("passport-local-mongoose");
+const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
 	email: String,
@@ -10,11 +10,11 @@ const UserSchema = new Schema({
 	post: [{
 		type: Schema.Types.ObjectId,
 		ref: "Post"
-	}],
-	review: [{
-		type: Schema.Types.ObjectId,
-		ref: "Review"
 	}]
+	// review: [{
+	// 	type: Schema.Types.ObjectId,
+	// 	ref: "Review"
+	// }]
 });
 
 UserSchema.plugin(passportLocalMongoose)
