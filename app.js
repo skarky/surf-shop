@@ -1,12 +1,25 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const createError 				= require('http-errors');
+const express 					= require('express');
+const path 						= require('path');
+const cookieParser 				= require('cookie-parser');
+const logger 					= require('morgan');
+const bodyParser 				= require("body-parser");
+const passport					= require("passport");
+const session 					= require('express-session')
+const LocalStrategy 			= require("passport-local");
+const mongoose 					= require("mongoose");
+// const passportLocalMongoose 	= require("passport-local-mongoose");
 
-const indexRouter = require('./routes/index');
-const postsRouter = require('./routes/posts');
-const usersRouter = require('./routes/users');
+
+//connect to databse
+
+mongoose.connect("mongodb://localhost:27017/surf-shop", {useNewUrlParser: true});
+
+// requires the model with Passport-Local Mongoose plugged in
+const User 			= require('./models/user');
+const indexRouter 	= require('./routes/index');
+const postsRouter 	= require('./routes/posts');
+const usersRouter 	= require('./routes/users');
 
 const app = express();
 
@@ -19,6 +32,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+/************** Passport goes before routes and after cookie pareser	*/
+//INCLUDE EXPRESS SESSION before Passport is important
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
+//Passport starts
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+/************** Passport goes before routes and after cookie pareser	*/
 
 app.use('/', indexRouter);
 app.use('/posts', postsRouter);

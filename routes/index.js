@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
-
+const express 	= require('express');
+const router 	= express.Router();
+const { postRegister }		= require("../controllers/index");
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -12,9 +12,7 @@ router.get("/register",(req, res, next)=>{
 });
 
 //POST 	/register			//post a new user
-router.post("/register", (req, res, next)=>{
-	res.send("/ post register");
-});
+router.post("/register", postRegister);
 
 //GET 	/login		//show one user
 router.get("/login", (req, res, next)=>{
@@ -46,11 +44,11 @@ router.put("/forgot-pw", (req, res, next)=>{
 	res.send("put forgot-pw");
 });
 // GET		/reset-pw/:token		//update user
-router.get("/reset-pw/:token", (req, res, next)=>{
+router.get("/reset/:token", (req, res, next)=>{
 	res.send("profile");
 });
 // PUT		/preset-pw/:token	//update user
-router.put("/reset-pw/:token", (req, res, next)=>{
+router.put("/reset/:token", (req, res, next)=>{
 	res.send("put reset-pw/:token");
 });
 

@@ -19,6 +19,9 @@
 	git push -u origin master
 
 
+//	npm uninstall <>, npm install i -S <>
+	npm audit fix
+
 #WORKING DIRECTORY
 -Area where all our files directory and changig living all the time
 
