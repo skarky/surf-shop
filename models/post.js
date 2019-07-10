@@ -8,11 +8,11 @@ const PostSchema = new Schema({
 	images: String,
 	location: String,
 	autor: [{
-		type: Schema.Type.ObjectId,
+		type: Schema.Types.ObjectId,
 		ref: "User"
 	}],
 	reviews: [{
-		type: Schema.Type.ObjectId,
+		type: Schema.Types.ObjectId,
 		ref: "Review"
 	}]
 })

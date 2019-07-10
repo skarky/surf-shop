@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Post</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  	<% posts.forEach((el)=>{ %>
+  		<h1><%= el.title %></h1>
+    	<p><%= el.description %></p>
+    	<p>Cijena: <%= el.price %></p>
+    	<p>Lokacija: <%= el.location %></p>
+    	<a href="/posts/<%= el._id %>">Detaljno</a>
+  	<% }) %>
+    
+  </body>
+</html>

@@ -22,6 +22,8 @@
 //	npm uninstall <>, npm install i -S <>
 	npm audit fix
 
+	npm i -S passport passport-local passport-local-mongoose express-session
+
 #WORKING DIRECTORY
 -Area where all our files directory and changig living all the time
 

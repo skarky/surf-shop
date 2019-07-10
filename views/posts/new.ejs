@@ -1,0 +1,26 @@
+<h1>Create new post</h1>
+
+<form action="/posts" method="POST">
+	<div><input type="text" name="title" placeholder="title"></input></div>
+	<div><input type="number" name="price" placeholder="price"></input></div>
+	<div><textarea name="description" placeholder="description"></textarea></div>
+	<div><input type="text" name="location" placeholder="location"></input></div>
+	<div><input type="submit">
+
+</form>
+<!--
+	title: String,
+	price: Number,
+	description: String,
+	images: String,
+	location: String,
+	autor: [{
+		type: Schema.Types.ObjectId,
+		ref: "User"
+	}],
+	reviews: [{
+		type: Schema.Types.ObjectId,
+		ref: "Review"
+	}]
+
+-->
