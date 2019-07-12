@@ -8,6 +8,7 @@ const passport					= require("passport");
 const session 					= require('express-session')
 const LocalStrategy 			= require("passport-local");
 const mongoose 					= require("mongoose");
+const methodOverride = require("method-override");
 // const passportLocalMongoose 	= require("passport-local-mongoose");
 
 
@@ -16,7 +17,7 @@ const mongoose 					= require("mongoose");
 mongoose.connect("mongodb://localhost:27017/surf-shop", {useNewUrlParser: true});
 
 // requires the model with Passport-Local Mongoose plugged in
-const User 			= require('./models/user');
+const User 			    = require('./models/user');
 const indexRouter 	= require('./routes/index');
 const postsRouter 	= require('./routes/posts');
 const usersRouter 	= require('./routes/users');
@@ -29,10 +30,10 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(methodOverride("_method"));
 /************** Passport goes before routes and after cookie pareser	*/
 //INCLUDE EXPRESS SESSION before Passport is important
 app.use(session({

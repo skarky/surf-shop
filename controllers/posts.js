@@ -49,7 +49,58 @@ module.exports = {
   		res.render("./posts/show", {post});
 		},
 	async editPost(req, res, next){
-  	// res.render('index', { title: 'Express' });
-  	res.render("/posts/:id/edit");
+  	let post = await Post.findById(req.params.id);
+  	res.render("./posts/edit",{post});
+	},
+
+	updatePost(req, res, next){
+	 var newPost = {
+	    title:req.body.title,
+	    price:req.body.price,
+	    description:req.body.description,
+	    location:req.body.location
+	  }
+	 Post.findByIdAndUpdate(req.params.id, newPost, function(err, post){
+	  if(err){
+	    console.log(err);
+	  }else{
+	    console.log(post);
+	     res.redirect("/posts/" + req.params.id);
+	  		}
+	 	});
+	},
+
+	async deletePost(req, res, next){
+		await Post.findByIdAndRemove(req.params.id, (err)=>{
+			if(err){
+				console.log(err);
+			}else{
+				// post.remove();
+			res.redirect("/posts");
+			}
+		});
 	}
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

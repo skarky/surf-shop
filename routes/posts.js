@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { errorHendler } = require("../middleware");
-const { getPosts, newPost, makePost, detailPost, editPost }  = require("../controllers/posts");
+const { getPosts, newPost, makePost, detailPost, editPost, updatePost, deletePost }  = require("../controllers/posts");
 
 /* 1 GET index posts page. */
 router.get('/', errorHendler(getPosts));
@@ -19,16 +19,10 @@ router.get('/:id', errorHendler(detailPost));
 router.get('/:id/edit', errorHendler(editPost));
 
 /* 6 GET update page. */
-router.put('/:id', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
-  res.send("/posts");
-});
+router.put('/:id', errorHendler(updatePost));
 
 /* 7 GET destroy page. */
-router.delete('/:id', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
-  res.send("/posts/:id");
-});
+router.delete('/:id', errorHendler(deletePost));
 
 
 /*
